@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: flower_marketplace_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: flower_marketplace
+      MYSQL_USER: flower_user
+      MYSQL_PASSWORD: flower_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - flower_mysql_data:/var/lib/mysql
+
+volumes:
+  flower_mysql_data:

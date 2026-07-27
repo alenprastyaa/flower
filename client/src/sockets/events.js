@@ -1,0 +1,8 @@
+export const CAMPAIGN_PUBLISHED = 'campaign:published'
+export const CAMPAIGN_CLAIMED = 'campaign:claimed'
+export const CAMPAIGN_EXPIRED = 'campaign:expired'
+export const ORDER_NEW_CLAIM = 'order:new-claim'
+export const ORDER_STATUS_CHANGED = 'order:status-changed'
+export const ORDER_SUBMITTED = 'order:submitted'
+export const CHAT_ORDER_MESSAGE = 'chat:order-message'
+export const CHAT_GROUP_MESSAGE = 'chat:group-message'
