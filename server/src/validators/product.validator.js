@@ -6,6 +6,7 @@ const createProductSchema = z.object({
   price: z.number().positive(),
   image_url: z.string().url().optional(),
   category: z.string().max(100).optional(),
+  category_group: z.string().max(100).nullable().optional(),
   region_group_id: z.number().int().nullable().optional(),
   is_active: z.boolean().optional(),
   sort_order: z.number().int().optional(),

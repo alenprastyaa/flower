@@ -24,6 +24,7 @@ const emptyForm = () => ({
   subtitle: '',
   price: '',
   category: '',
+  category_group: '',
   region_group_id: '',
   image_url: '',
   sort_order: 0,
@@ -64,6 +65,7 @@ function startEdit(p) {
     subtitle: p.subtitle || '',
     price: p.price,
     category: p.category || '',
+    category_group: p.category_group || '',
     region_group_id: p.region_group_id || '',
     image_url: p.image_url || '',
     sort_order: p.sort_order,
@@ -89,6 +91,7 @@ async function onSave() {
       subtitle: form.subtitle || undefined,
       price: Number(form.price),
       category: form.category || undefined,
+      category_group: form.category_group || null,
       region_group_id: form.region_group_id ? Number(form.region_group_id) : null,
       image_url: form.image_url || undefined,
       sort_order: Number(form.sort_order) || 0,
@@ -204,7 +207,14 @@ async function onDeleteConfirmed() {
           <BaseInput v-model="form.price" label="Harga (Rp)" type="number" required />
           <BaseInput v-model="form.sort_order" label="Urutan Tampil" type="number" />
         </div>
-        <BaseInput v-model="form.category" label="Kategori (opsional)" placeholder="mis. Papan Bunga, Buket" />
+        <div class="grid grid-cols-2 gap-4">
+          <BaseInput v-model="form.category_group" label="Grup Kategori (opsional)" placeholder="mis. Rangkaian" />
+          <BaseInput v-model="form.category" label="Kategori / Sub-jenis" placeholder="mis. Bucket, Papan Bunga" />
+        </div>
+        <p class="-mt-2 text-xs text-slate-400">
+          Isi "Grup Kategori" jika produk ini punya sub-jenis (mis. grup "Rangkaian" berisi Bucket, Standing Flower,
+          dll). Kosongkan jika kategori ini berdiri sendiri (mis. Papan Bunga).
+        </p>
 
         <div>
           <label class="mb-1 block text-sm font-medium text-slate-700">Wilayah Pengiriman (opsional)</label>

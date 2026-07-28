@@ -17,6 +17,7 @@ module.exports = (sequelize) => {
       price: { type: DataTypes.DECIMAL(12, 2), allowNull: false },
       image_url: { type: DataTypes.STRING(500), allowNull: true },
       category: { type: DataTypes.STRING(100), allowNull: true },
+      category_group: { type: DataTypes.STRING(100), allowNull: true },
       region_group_id: { type: DataTypes.BIGINT.UNSIGNED, allowNull: true },
       is_active: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
       sort_order: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },

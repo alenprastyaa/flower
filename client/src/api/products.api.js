@@ -6,6 +6,10 @@ export function listPublicProducts(regionGroupId) {
     .then((r) => r.data.data)
 }
 
+export function listPublicProductTaxonomy() {
+  return http.get('/public/products/taxonomy').then((r) => r.data.data)
+}
+
 export function listAdminProducts() {
   return http.get('/admin/products').then((r) => r.data.data)
 }

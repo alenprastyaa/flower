@@ -5,7 +5,7 @@ const { submitRatingSchema } = require('../validators/rating.validator');
 const { submitOrder, trackOrder, submitRating } = require('../controllers/orderRequest.controller');
 const { listPublicCampaigns } = require('../controllers/campaign.controller');
 const { listPublicCraftsmen, getPublicCraftsmanBySlug } = require('../controllers/craftsmanProfile.controller');
-const { listPublicActiveProducts } = require('../controllers/product.controller');
+const { listPublicActiveProducts, listPublicProductTaxonomy } = require('../controllers/product.controller');
 const { listPublicActiveRegionGroups } = require('../controllers/regionGroup.controller');
 const { listProvinces, listRegencies, listDistricts, listVillages } = require('../controllers/region.controller');
 const { sendMessageSchema, sendVisitorMessageSchema } = require('../validators/chat.validator');
@@ -24,6 +24,7 @@ router.get('/campaigns', listPublicCampaigns);
 router.get('/craftsmen', listPublicCraftsmen);
 router.get('/craftsmen/:slug', getPublicCraftsmanBySlug);
 router.get('/products', listPublicActiveProducts);
+router.get('/products/taxonomy', listPublicProductTaxonomy);
 router.get('/region-groups', listPublicActiveRegionGroups);
 
 router.get('/regions/provinces', listProvinces);

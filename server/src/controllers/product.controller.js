@@ -23,6 +23,17 @@ const listPublicActiveProducts = asyncHandler(async (req, res) => {
   res.json({ data: products });
 });
 
+// Navigation structure only (category_group / category / region_group_id) —
+// includes inactive products so a category/region button can appear as soon
+// as an admin tags a product for it, even before it's published live. Never
+// exposes name/price/image for inactive rows.
+const listPublicProductTaxonomy = asyncHandler(async (req, res) => {
+  const rows = await Product.findAll({
+    attributes: ['category_group', 'category', 'region_group_id'],
+  });
+  res.json({ data: rows });
+});
+
 const listAllProducts = asyncHandler(async (req, res) => {
   const products = await Product.findAll({
     order: [
@@ -52,4 +63,11 @@ const deleteProduct = asyncHandler(async (req, res) => {
   res.status(204).send();
 });
 
-module.exports = { listPublicActiveProducts, listAllProducts, createProduct, updateProduct, deleteProduct };
+module.exports = {
+  listPublicActiveProducts,
+  listPublicProductTaxonomy,
+  listAllProducts,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};
