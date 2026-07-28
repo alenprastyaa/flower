@@ -3,6 +3,7 @@ import { reactive, ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { submitOrder } from '../../api/orders.api'
 import { listPublicProducts } from '../../api/products.api'
+import { listPublicRegionGroups } from '../../api/regionGroups.api'
 import BaseCard from '../../components/ui/BaseCard.vue'
 import BaseInput from '../../components/ui/BaseInput.vue'
 import BaseButton from '../../components/ui/BaseButton.vue'
@@ -39,6 +40,20 @@ onMounted(async () => {
   const products = await listPublicProducts()
   product.value = products.find((p) => p.id === productId) || null
   notFound.value = !product.value
+
+  // If the buyer already picked a region on the landing page and that
+  // region maps to a single official province, pre-fill it here — the
+  // RegionSelect below only reads `region.value` once, on its own mount,
+  // so this must be set before `loadingProduct` flips the form into view.
+  const regionGroupId = Number(route.query.regionGroupId)
+  if (product.value && regionGroupId) {
+    const regionGroups = await listPublicRegionGroups()
+    const matched = regionGroups.find((r) => r.id === regionGroupId)
+    if (matched?.province_name) {
+      region.value = { ...region.value, province: matched.province_name }
+    }
+  }
+
   loadingProduct.value = false
 })
 

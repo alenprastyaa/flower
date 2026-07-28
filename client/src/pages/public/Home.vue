@@ -32,7 +32,11 @@ function openZoom(product) {
 
 function chooseProduct(product) {
   zoomProduct.value = null
-  router.push(`/pesan/${product.id}`)
+  // Carry the product's own region tag along (not just UI nav state) so it
+  // works regardless of how the buyer got here — grid, zoom modal, or the
+  // featured teaser that skips region selection entirely.
+  const query = product.region_group_id ? { regionGroupId: product.region_group_id } : {}
+  router.push({ path: `/pesan/${product.id}`, query })
 }
 
 onMounted(async () => {

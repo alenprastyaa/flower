@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
 import { listAdminRegionGroups, createRegionGroup, updateRegionGroup, deleteRegionGroup } from '../../api/regionGroups.api'
+import { listProvinces } from '../../api/regions.api'
 import BaseCard from '../../components/ui/BaseCard.vue'
 import BaseInput from '../../components/ui/BaseInput.vue'
 import BaseButton from '../../components/ui/BaseButton.vue'
@@ -8,6 +9,7 @@ import BaseFileInput from '../../components/ui/BaseFileInput.vue'
 import BaseModal from '../../components/ui/BaseModal.vue'
 
 const regionGroups = ref([])
+const provinces = ref([])
 const loading = ref(true)
 const saving = ref(false)
 const deleting = ref(false)
@@ -17,12 +19,14 @@ const formModalOpen = ref(false)
 const deleteTarget = ref(null)
 const uploadingImage = ref(false)
 
-const emptyForm = () => ({ name: '', image_url: '', sort_order: 0, is_active: true })
+const emptyForm = () => ({ name: '', image_url: '', province_name: '', sort_order: 0, is_active: true })
 const form = reactive(emptyForm())
 
 async function load() {
   loading.value = true
-  regionGroups.value = await listAdminRegionGroups()
+  const [regionList, provinceList] = await Promise.all([listAdminRegionGroups(), listProvinces()])
+  regionGroups.value = regionList
+  provinces.value = provinceList
   loading.value = false
 }
 
@@ -41,6 +45,7 @@ function startEdit(r) {
   Object.assign(form, {
     name: r.name,
     image_url: r.image_url || '',
+    province_name: r.province_name || '',
     sort_order: r.sort_order,
     is_active: r.is_active,
   })
@@ -62,6 +67,7 @@ async function onSave() {
     const payload = {
       name: form.name,
       image_url: form.image_url || undefined,
+      province_name: form.province_name || null,
       sort_order: Number(form.sort_order) || 0,
       is_active: Boolean(form.is_active),
     }
@@ -170,6 +176,21 @@ async function onDeleteConfirmed() {
       <div class="space-y-4">
         <BaseInput v-model="form.name" label="Nama Wilayah" placeholder="mis. Jabodetabek" required />
         <BaseInput v-model="form.sort_order" label="Urutan Tampil" type="number" />
+
+        <div>
+          <label class="mb-1 block text-sm font-medium text-slate-700">Provinsi Terkait (opsional)</label>
+          <select
+            v-model="form.province_name"
+            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+          >
+            <option value="">Tidak ditautkan</option>
+            <option v-for="p in provinces" :key="p.code" :value="p.name">{{ p.name }}</option>
+          </select>
+          <p class="mt-1 text-xs text-slate-400">
+            Kalau diisi, provinsi ini otomatis terpilih di form alamat pengiriman saat pembeli sudah memilih
+            wilayah ini. Kosongkan jika wilayah ini mencakup lebih dari satu provinsi (mis. Jabodetabek, Sumatra).
+          </p>
+        </div>
 
         <div>
           <BaseFileInput
