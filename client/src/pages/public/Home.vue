@@ -85,6 +85,11 @@ const filteredProducts = computed(() => {
   return list
 })
 
+// Quick-pick teaser on the first screen — top 4 by admin's own sort order,
+// so visitors see real products before even choosing a category. Opens the
+// same zoom modal; ordering from there skips category/region picking.
+const featuredProducts = computed(() => products.value.slice(0, 4))
+
 const steps = [
   {
     title: 'Pilih Bunga',
@@ -152,6 +157,41 @@ const trustPoints = [
               </span>
               <span class="text-sm font-semibold leading-snug text-slate-900">{{ c }}</span>
             </button>
+          </div>
+
+          <!-- Produk pilihan -->
+          <div v-if="!loading && featuredProducts.length" class="mx-auto mt-14 max-w-6xl">
+            <h2 class="text-center text-lg font-bold text-slate-900 sm:text-xl">Produk Pilihan</h2>
+            <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <div
+                v-for="p in featuredProducts"
+                :key="p.id"
+                class="group flex cursor-pointer flex-col overflow-hidden rounded-2xl bg-white text-left shadow-sm ring-1 ring-slate-200 transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                role="button"
+                tabindex="0"
+                @click="openZoom(p)"
+                @keydown.enter="openZoom(p)"
+              >
+                <div class="relative aspect-[4/3] w-full overflow-hidden bg-emerald-50">
+                  <img
+                    v-if="p.image_url"
+                    :src="p.image_url"
+                    :alt="p.name"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span
+                    v-if="p.category"
+                    class="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[11px] font-medium text-emerald-700 shadow-sm"
+                  >
+                    {{ p.category }}
+                  </span>
+                </div>
+                <div class="flex flex-1 flex-col p-3 sm:p-4">
+                  <p class="line-clamp-2 text-sm font-semibold text-slate-900 sm:text-base">{{ p.name }}</p>
+                  <span class="mt-auto pt-3 text-sm font-bold text-emerald-700 sm:text-base">{{ formatPrice(p.price) }}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
