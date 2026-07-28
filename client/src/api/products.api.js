@@ -1,7 +1,9 @@
 import http from './http'
 
-export function listPublicProducts() {
-  return http.get('/public/products').then((r) => r.data.data)
+export function listPublicProducts(regionGroupId) {
+  return http
+    .get('/public/products', { params: regionGroupId ? { regionGroupId } : {} })
+    .then((r) => r.data.data)
 }
 
 export function listAdminProducts() {

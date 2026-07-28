@@ -25,6 +25,11 @@ const nav = computed(() => [
     dot: true,
   },
   {
+    to: '/admin/wilayah',
+    label: 'Wilayah Pengiriman',
+    icon: 'M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Zm0-8.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z',
+  },
+  {
     to: '/admin/tinjau',
     label: 'Review Pesanan',
     icon: 'M9 5h6M4 4h16v16a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4Zm5 10 2 2 4-4',

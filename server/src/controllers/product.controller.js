@@ -1,10 +1,20 @@
 const asyncHandler = require('../utils/asyncHandler');
 const ApiError = require('../utils/ApiError');
+const { Op } = require('sequelize');
 const { Product } = require('../models');
 
 const listPublicActiveProducts = asyncHandler(async (req, res) => {
+  const where = { is_active: true };
+
+  // A product with no region_group_id is universal (shown for every region);
+  // one tagged to a region is only shown when that region is selected.
+  const { regionGroupId } = req.query;
+  if (regionGroupId) {
+    where.region_group_id = { [Op.or]: [Number(regionGroupId), null] };
+  }
+
   const products = await Product.findAll({
-    where: { is_active: true },
+    where,
     order: [
       ['sort_order', 'ASC'],
       ['created_at', 'DESC'],

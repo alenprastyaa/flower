@@ -6,6 +6,7 @@ const models = {
   CraftsmanProfile: require('./craftsmanProfile.model')(sequelize),
   PortfolioItem: require('./portfolioItem.model')(sequelize),
   Product: require('./product.model')(sequelize),
+  RegionGroup: require('./regionGroup.model')(sequelize),
   OrderRequest: require('./orderRequest.model')(sequelize),
   Campaign: require('./campaign.model')(sequelize),
   OrderStatusHistory: require('./orderStatusHistory.model')(sequelize),

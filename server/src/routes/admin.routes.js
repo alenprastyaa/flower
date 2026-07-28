@@ -36,6 +36,13 @@ const {
   deleteProduct,
 } = require('../controllers/product.controller');
 const {
+  listAllRegionGroups,
+  createRegionGroup,
+  updateRegionGroup,
+  deleteRegionGroup,
+} = require('../controllers/regionGroup.controller');
+const { createRegionGroupSchema, updateRegionGroupSchema } = require('../validators/regionGroup.validator');
+const {
   listAdminConversations,
   getAdminConversation,
   sendAdminReply,
@@ -69,6 +76,11 @@ router.get('/products', listAllProducts);
 router.post('/products', validate(createProductSchema), createProduct);
 router.put('/products/:id', validate(updateProductSchema), updateProduct);
 router.delete('/products/:id', deleteProduct);
+
+router.get('/region-groups', listAllRegionGroups);
+router.post('/region-groups', validate(createRegionGroupSchema), createRegionGroup);
+router.put('/region-groups/:id', validate(updateRegionGroupSchema), updateRegionGroup);
+router.delete('/region-groups/:id', deleteRegionGroup);
 
 router.get('/chat/conversations', listAdminConversations);
 router.get('/chat/conversations/:id', getAdminConversation);

@@ -1,12 +1,15 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { listPublicProducts } from '../../api/products.api'
+import { listPublicRegionGroups } from '../../api/regionGroups.api'
 import BaseModal from '../../components/ui/BaseModal.vue'
 import BaseButton from '../../components/ui/BaseButton.vue'
 
 const router = useRouter()
 const products = ref([])
+const regionGroups = ref([])
+const selectedRegionId = ref(null)
 const loading = ref(true)
 const activeCategory = ref('Semua')
 const zoomProduct = ref(null)
@@ -24,10 +27,23 @@ function chooseProduct(product) {
   router.push(`/pesan/${product.id}`)
 }
 
-onMounted(async () => {
-  products.value = await listPublicProducts()
+async function loadProducts() {
+  loading.value = true
+  activeCategory.value = 'Semua'
+  products.value = await listPublicProducts(selectedRegionId.value)
   loading.value = false
+}
+
+function selectRegion(id) {
+  selectedRegionId.value = id
+}
+
+onMounted(async () => {
+  regionGroups.value = await listPublicRegionGroups()
+  await loadProducts()
 })
+
+watch(selectedRegionId, loadProducts)
 
 const categories = computed(() => {
   const set = new Set(products.value.map((p) => p.category).filter(Boolean))
@@ -77,12 +93,56 @@ const trustPoints = [
             🌸 Wadah Resmi Komunitas Pengrajin Bunga
           </span>
           <h1 class="mx-auto mt-4 max-w-2xl text-2xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
-            Pilih Karangan Bunga Anda
+            Mau Kirim Karangan Bunga ke Mana?
           </h1>
           <p class="mx-auto mt-3 max-w-xl text-sm text-slate-600 sm:text-base">
-            Harga sudah pasti, tanpa nego — tinggal pilih, lengkapi detail pengiriman, dan pengrajin
-            terpercaya kami yang mengerjakan.
+            Pilih wilayah tujuan pengiriman, lalu pilih karangan bunga yang Anda mau — harga sudah pasti,
+            tanpa nego.
           </p>
+        </div>
+
+        <!-- Wilayah tujuan pengiriman -->
+        <div v-if="regionGroups.length" class="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+          <button
+            v-for="r in regionGroups"
+            :key="r.id"
+            type="button"
+            class="flex flex-col items-center gap-2 rounded-2xl border-2 bg-white p-4 text-center transition-all hover:-translate-y-0.5 hover:shadow-md"
+            :class="selectedRegionId === r.id ? 'border-emerald-600 shadow-md' : 'border-transparent ring-1 ring-slate-200'"
+            @click="selectRegion(r.id)"
+          >
+            <span
+              class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full"
+              :class="selectedRegionId === r.id ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-700'"
+            >
+              <img v-if="r.image_url" :src="r.image_url" :alt="r.name" class="h-full w-full object-cover" />
+              <svg v-else class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Zm0-8.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                />
+              </svg>
+            </span>
+            <span class="text-xs font-semibold leading-snug text-slate-900 sm:text-sm">Papan Bunga {{ r.name }}</span>
+          </button>
+
+          <button
+            type="button"
+            class="flex flex-col items-center gap-2 rounded-2xl border-2 bg-white p-4 text-center transition-all hover:-translate-y-0.5 hover:shadow-md"
+            :class="selectedRegionId === null ? 'border-emerald-600 shadow-md' : 'border-transparent ring-1 ring-slate-200'"
+            @click="selectRegion(null)"
+          >
+            <span
+              class="flex h-10 w-10 items-center justify-center rounded-full"
+              :class="selectedRegionId === null ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-700'"
+            >
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </span>
+            <span class="text-xs font-semibold leading-snug text-slate-900 sm:text-sm">Semua Wilayah</span>
+          </button>
         </div>
 
         <div v-if="categories.length > 2" class="mt-8 flex flex-wrap justify-center gap-2">

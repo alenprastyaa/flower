@@ -20,6 +20,7 @@ import CraftsmanMyOrders from '../pages/craftsman/MyOrders.vue'
 import CraftsmanProfileEditor from '../pages/craftsman/ProfileEditor.vue'
 import AdminDashboard from '../pages/admin/Dashboard.vue'
 import AdminProducts from '../pages/admin/Products.vue'
+import AdminRegionGroups from '../pages/admin/RegionGroups.vue'
 import ReviewQueue from '../pages/admin/ReviewQueue.vue'
 import AdminCampaigns from '../pages/admin/Campaigns.vue'
 import AllOrders from '../pages/admin/AllOrders.vue'
@@ -65,6 +66,7 @@ const routes = [
       { path: '', redirect: '/admin/dashboard' },
       { path: 'dashboard', name: 'admin-dashboard', component: AdminDashboard },
       { path: 'produk', name: 'admin-products', component: AdminProducts },
+      { path: 'wilayah', name: 'admin-region-groups', component: AdminRegionGroups },
       { path: 'tinjau', name: 'admin-review-queue', component: ReviewQueue },
       { path: 'kampanye', name: 'admin-campaigns', component: AdminCampaigns },
       { path: 'pesanan', name: 'admin-all-orders', component: AllOrders },

@@ -6,3 +6,4 @@ server/public/
 *.log
 .DS_Store
 uploads/
+.claude/
