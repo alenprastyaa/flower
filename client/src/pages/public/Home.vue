@@ -141,7 +141,22 @@ const showingProducts = computed(
 // Quick-pick teaser on the first screen — top 4 by admin's own sort order,
 // so visitors see real products before even choosing a category. Opens the
 // same zoom modal; ordering from there skips category/region picking.
-const featuredProducts = computed(() => products.value.slice(0, 4))
+// Products tagged to multiple regions are duplicated rows with the same
+// name (one per region) — dedupe by name so the teaser doesn't show the
+// same listing several times in a row, and strip the region tag from the
+// picked representative since it's arbitrary (whichever region sorts
+// first), not something the buyer actually chose.
+const featuredProducts = computed(() => {
+  const seen = new Set()
+  const result = []
+  for (const p of products.value) {
+    if (seen.has(p.name)) continue
+    seen.add(p.name)
+    result.push({ ...p, region_group_id: null })
+    if (result.length === 4) break
+  }
+  return result
+})
 
 const steps = [
   {
