@@ -508,21 +508,5 @@ const trustPoints = [
         </div>
       </div>
     </section>
-
-    <!-- Closing CTA -->
-    <section class="bg-gradient-to-r from-emerald-700 to-emerald-600">
-      <div class="mx-auto max-w-6xl px-4 py-12 text-center sm:py-16">
-        <h2 class="text-2xl font-bold text-white sm:text-3xl">Punya Usaha Karangan Bunga?</h2>
-        <p class="mx-auto mt-2 max-w-md text-sm text-emerald-50">
-          Bergabung jadi pengrajin di platform kami dan dapatkan pesanan dari komunitas pembeli kami.
-        </p>
-        <router-link
-          to="/daftar-pengrajin"
-          class="mt-6 inline-block rounded-lg bg-white px-6 py-3 text-sm font-semibold text-emerald-700 hover:bg-emerald-50"
-        >
-          Daftar Sebagai Pengrajin
-        </router-link>
-      </div>
-    </section>
   </div>
 </template>
