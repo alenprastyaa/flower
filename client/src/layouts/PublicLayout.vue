@@ -6,17 +6,14 @@ import ContactWidget from '../components/domain/ContactWidget.vue'
 const auth = useAuthStore()
 const menuOpen = ref(false)
 
-const links = [
-  { to: '/#etalase', label: 'Pilih Bunga' },
-  { to: '/toko', label: 'Pengrajin' },
-  { to: '/campaigns', label: 'Campaign' },
-  { to: '/daftar-pengrajin', label: 'Jadi Pengrajin' },
-]
+// Craftsman-partner pages (directory, storefronts, campaign board) and the
+// partner sign-up flow stay live in the router for internal/direct-link use,
+// but are intentionally not linked from public nav — the storefront brand
+// presents as a single business, not a marketplace of partners.
+const links = [{ to: '/#etalase', label: 'Pilih Bunga' }]
 
 const footerExploreLinks = [
   { to: '/#etalase', label: 'Etalase Bunga' },
-  { to: '/toko', label: 'Pengrajin Kami' },
-  { to: '/campaigns', label: 'Campaign Terbuka' },
   { to: '/#cara-kerja', label: 'Cara Kerja' },
 ]
 
@@ -143,11 +140,11 @@ const year = new Date().getFullYear()
               <span class="text-xl font-semibold tracking-tight text-white">Karangan Bunga</span>
             </div>
             <p class="mt-4 max-w-sm text-sm italic leading-relaxed text-emerald-200/90">
-              "Setiap rangkaian punya cerita — kami rangkaikan Anda dengan pengrajin bunga terbaik di sekitar."
+              "Setiap rangkaian punya cerita — dibuat dengan hati untuk momen spesial Anda."
             </p>
             <p class="mt-3 max-w-sm text-sm leading-relaxed text-emerald-100/70">
-              Wadah resmi komunitas pengrajin karangan bunga. Pesan mudah, harga transparan, dikerjakan oleh
-              tangan-tangan terpercaya.
+              Toko karangan bunga terpercaya. Pesan mudah, harga transparan, dikerjakan oleh tangan-tangan
+              berpengalaman.
             </p>
           </div>
 
@@ -165,19 +162,15 @@ const year = new Date().getFullYear()
           <div>
             <h3 class="text-xs font-semibold uppercase tracking-widest text-emerald-300">Bantuan</h3>
             <ul class="mt-4 space-y-2.5 text-sm text-emerald-100/80">
-              <li>
-                <router-link to="/daftar-pengrajin" class="transition-colors hover:text-white">
-                  Jadi Pengrajin
-                </router-link>
-              </li>
-              <li>Punya pertanyaan? Klik ikon chat di pojok kanan bawah.</li>
+              <li>Punya pertanyaan seputar pesanan? Klik ikon chat di pojok kanan bawah.</li>
+              <li>Link lacak pesanan tersedia di halaman konfirmasi setelah Anda memesan.</li>
             </ul>
           </div>
         </div>
 
         <div class="mt-12 flex flex-col items-center gap-2 border-t border-emerald-700/50 pt-6 text-center text-xs text-emerald-300/70 sm:flex-row sm:justify-between">
           <p>&copy; {{ year }} Karangan Bunga. Dibuat dengan 🌸 untuk pecinta bunga.</p>
-          <p>Setiap pengrajin di sini telah ditinjau &amp; disetujui admin.</p>
+          <p>Kualitas setiap pesanan terjamin, dari pemilihan bunga sampai pengiriman.</p>
         </div>
       </div>
     </footer>

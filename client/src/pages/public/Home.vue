@@ -165,19 +165,19 @@ const steps = [
     icon: 'M9 5l7 7-7 7',
   },
   {
-    title: 'Ditinjau Admin',
-    desc: 'Tim kami meninjau kelengkapan pesanan Anda sebelum diteruskan ke pengrajin.',
+    title: 'Ditinjau Tim Kami',
+    desc: 'Tim kami meninjau kelengkapan pesanan Anda sebelum diproses.',
     icon: 'M5 13l4 4L19 7',
   },
   {
-    title: 'Dikerjakan Pengrajin Terpercaya',
-    desc: 'Pengrajin komunitas kami yang tersedia akan membuat & mengirimkan pesanan Anda.',
+    title: 'Dibuat & Dikirim',
+    desc: 'Pesanan Anda dibuat dan dikirim tepat waktu ke alamat tujuan.',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
   },
 ]
 
 const trustPoints = [
-  { title: 'Pengrajin Terverifikasi', desc: 'Setiap pengrajin ditinjau & disetujui admin sebelum aktif.' },
+  { title: 'Kualitas Terjamin', desc: 'Setiap pesanan dikerjakan dengan standar kualitas terbaik.' },
   { title: 'Harga Transparan', desc: 'Harga tertera jelas di etalase, tanpa biaya tersembunyi.' },
   { title: 'Update Real-time', desc: 'Pantau status pesanan Anda dari dipesan sampai selesai.' },
 ]
@@ -195,7 +195,7 @@ const trustPoints = [
         <div v-if="!selectedGroup">
           <div class="text-center">
             <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-medium text-emerald-700 shadow-sm ring-1 ring-emerald-100">
-              🌸 Wadah Resmi Komunitas Pengrajin Bunga
+              🌸 Karangan Bunga Segar, Dipesan Online
             </span>
             <h1 class="mx-auto mt-4 max-w-2xl text-2xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl">
               Mau Pesan Bunga Apa?

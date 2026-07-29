@@ -120,7 +120,7 @@ async function onSubmitRating() {
         </div>
 
         <div v-if="order.claimedByCraftsman" class="mt-4 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-800">
-          Dikerjakan oleh <strong>{{ order.claimedByCraftsman.storeName }}</strong> ({{ order.claimedByCraftsman.city }})
+          Pesanan Anda sedang dikerjakan oleh tim kami.
         </div>
 
         <div v-if="order.adminNotes" class="mt-4 rounded-lg bg-rose-50 p-3 text-sm text-rose-700">

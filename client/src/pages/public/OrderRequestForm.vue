@@ -103,7 +103,7 @@ async function onSubmit() {
     <template v-else>
       <h1 class="text-2xl font-bold text-slate-900">Lengkapi Pesanan</h1>
       <p class="mt-1 text-sm text-slate-500">
-        Pesanan Anda akan ditinjau oleh admin, lalu dipublikasikan agar pengrajin dapat mengerjakannya.
+        Pesanan Anda akan ditinjau oleh tim kami sebelum diproses.
       </p>
 
       <BaseCard class="mt-6 flex items-center gap-4">
