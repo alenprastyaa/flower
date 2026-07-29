@@ -12,6 +12,15 @@ const links = [
   { to: '/campaigns', label: 'Campaign' },
   { to: '/daftar-pengrajin', label: 'Jadi Pengrajin' },
 ]
+
+const footerExploreLinks = [
+  { to: '/#etalase', label: 'Etalase Bunga' },
+  { to: '/toko', label: 'Pengrajin Kami' },
+  { to: '/campaigns', label: 'Campaign Terbuka' },
+  { to: '/#cara-kerja', label: 'Cara Kerja' },
+]
+
+const year = new Date().getFullYear()
 </script>
 
 <template>
@@ -84,6 +93,94 @@ const links = [
     <main class="flex-1">
       <router-view />
     </main>
+
+    <!-- Footer -->
+    <footer class="relative mt-16 overflow-hidden rounded-t-[2.5rem] bg-gradient-to-b from-emerald-800 to-emerald-950 text-emerald-50 sm:mt-20">
+      <!-- decorative flower silhouette, purely ornamental -->
+      <svg
+        class="pointer-events-none absolute -right-10 -top-16 h-64 w-64 text-emerald-700/40 sm:h-80 sm:w-80"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <g fill="currentColor">
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" />
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(72 12 12)" />
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(144 12 12)" />
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(216 12 12)" />
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(288 12 12)" />
+        </g>
+      </svg>
+      <svg
+        class="pointer-events-none absolute -bottom-10 -left-8 h-40 w-40 text-emerald-700/30 sm:h-52 sm:w-52"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <g fill="currentColor">
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" />
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(72 12 12)" />
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(144 12 12)" />
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(216 12 12)" />
+          <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(288 12 12)" />
+        </g>
+      </svg>
+
+      <div class="relative mx-auto max-w-6xl px-4 py-14 sm:py-16">
+        <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="sm:col-span-2 lg:col-span-2">
+            <div class="flex items-center gap-2.5">
+              <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20">
+                <svg class="h-5 w-5 text-emerald-100" viewBox="0 0 24 24" aria-hidden="true">
+                  <g fill="currentColor">
+                    <ellipse cx="12" cy="6.5" rx="3.4" ry="5" />
+                    <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(72 12 12)" />
+                    <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(144 12 12)" />
+                    <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(216 12 12)" />
+                    <ellipse cx="12" cy="6.5" rx="3.4" ry="5" transform="rotate(288 12 12)" />
+                  </g>
+                  <circle cx="12" cy="12" r="2.3" fill="#fbbf24" />
+                </svg>
+              </span>
+              <span class="text-xl font-semibold tracking-tight text-white">Karangan Bunga</span>
+            </div>
+            <p class="mt-4 max-w-sm text-sm italic leading-relaxed text-emerald-200/90">
+              "Setiap rangkaian punya cerita — kami rangkaikan Anda dengan pengrajin bunga terbaik di sekitar."
+            </p>
+            <p class="mt-3 max-w-sm text-sm leading-relaxed text-emerald-100/70">
+              Wadah resmi komunitas pengrajin karangan bunga. Pesan mudah, harga transparan, dikerjakan oleh
+              tangan-tangan terpercaya.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-widest text-emerald-300">Jelajahi</h3>
+            <ul class="mt-4 space-y-2.5 text-sm">
+              <li v-for="l in footerExploreLinks" :key="l.to">
+                <router-link :to="l.to" class="text-emerald-100/80 transition-colors hover:text-white">
+                  {{ l.label }}
+                </router-link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-widest text-emerald-300">Bantuan</h3>
+            <ul class="mt-4 space-y-2.5 text-sm text-emerald-100/80">
+              <li>
+                <router-link to="/daftar-pengrajin" class="transition-colors hover:text-white">
+                  Jadi Pengrajin
+                </router-link>
+              </li>
+              <li>Punya pertanyaan? Klik ikon chat di pojok kanan bawah.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-12 flex flex-col items-center gap-2 border-t border-emerald-700/50 pt-6 text-center text-xs text-emerald-300/70 sm:flex-row sm:justify-between">
+          <p>&copy; {{ year }} Karangan Bunga. Dibuat dengan 🌸 untuk pecinta bunga.</p>
+          <p>Setiap pengrajin di sini telah ditinjau &amp; disetujui admin.</p>
+        </div>
+      </div>
+    </footer>
 
     <ContactWidget v-if="!auth.isAuthenticated" />
   </div>

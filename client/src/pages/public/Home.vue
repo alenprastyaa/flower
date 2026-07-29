@@ -491,7 +491,7 @@ const trustPoints = [
     </section>
 
     <!-- Cara Kerja -->
-    <section class="bg-white py-16">
+    <section id="cara-kerja" class="scroll-mt-4 bg-white py-16">
       <div class="mx-auto max-w-6xl px-4">
         <h2 class="text-center text-2xl font-bold text-slate-900 sm:text-3xl">Cara Kerja</h2>
         <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
